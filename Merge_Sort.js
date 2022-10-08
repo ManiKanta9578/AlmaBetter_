@@ -1,55 +1,53 @@
-function mergeSort(arr, l, r){
-    //base condition
-    if(l <= r){
-        return
-    }
+let array=[34,21,41,12,1,6,89];
+console.log(array);
 
-    let mid = parseInt((l + r) / 2)  // split into 2 parts
-    mergeSort(arr, l, mid)  
-    mergeSort(arr, mid+1, r)
-    merge(arr, l, r, mid)
+mergesort(array,0,array.length-1);
+console.log(array);
+
+function mergesort(arr,left,right){
+    if(left<right){
+        let mid=parseInt(left+(right-left)/2);
+        mergesort(arr,left,mid);
+        mergesort(arr,mid+1,right);
+        merge(arr,left,mid,right);
+    }
 }
 
-function merge(arr, l, r, mid){
 
-    let n1 = l - mid + 1   //length of left array
-    let n2 = r - mid       // length of riht array
+function merge(arr,left,mid,right){
+    let m=mid-left+1;
+    let n=right-mid;
 
-    let L = new Array(n1)
-    let R = new Array(n2)
+    let leftArray=[];
+    let rightArray=[];
 
-    //copying data
-
-    for(i=0; i<n1; i++){
-        L[i] = arr[l + 1];
-    }
-    for(j=0; j<n2; j++){
-        R[j] = arr[mid+1 +1]
+    for(let i=0;i<m;i++){
+        leftArray[i]=arr[left+i];
     }
 
-    let i=0, j=0, k=0;
+    for(let i=0;i<n;i++){
+        rightArray[i]=arr[mid+i+1];
+    }
+    let i=0,j=0,k=left;
 
-    while(i<n1 && j<n2){
-        if(L[i] < R[j]){
-            arr[k] = L[i]
-            i++
-        }else{
-            arr[k] = R[j]
-            j++
+    while(i<m && j<n){
+        if(leftArray[i]<=rightArray[j]){
+            arr[k]=leftArray[i];
+            i++;
+            k++;
         }
-        k++
+        else{
+            arr[k]=rightArray[j];
+            j++;
+            k++;
+        }
     }
 
-    //copying remaining data
-
-    while(i<n1){
-        arr[k] = L[i]
-        i++
-        k++
+    while(i<m){
+        arr[k]=leftArray[i]; i++; k++;
     }
-    while(j<n2){
-        arr[k] = R[j]
-        j++
-        k++
+
+    while(j<n){
+        arr[k]=rightArray[j]; j++;k++;
     }
 }
