@@ -1,3 +1,17 @@
+// l is for left index and r is
+// right index of the sub-array
+// of arr to be sorted 
+
+function mergeSort(arr,l, r){
+	if(l>=r){
+		return;//returns recursively
+	}
+	let m =l+ parseInt((r-l)/2);
+	mergeSort(arr,l,m);   // m => middle value of array
+	mergeSort(arr,m+1,r);
+	merge(arr,l,m,r);
+}
+
 function merge(arr, l, m, r)
 {
 	let n1 = m - l + 1;
@@ -51,19 +65,6 @@ function merge(arr, l, m, r)
 		j++;
 		k++;
 	}
-}
-
-// l is for left index and r is
-// right index of the sub-array
-// of arr to be sorted */
-function mergeSort(arr,l, r){
-	if(l>=r){
-		return;//returns recursively
-	}
-	let m =l+ parseInt((r-l)/2);
-	mergeSort(arr,l,m);
-	mergeSort(arr,m+1,r);
-	merge(arr,l,m,r);
 }
 
 let arr = [ 12, 11, 13, 5, 6, 7 ];
